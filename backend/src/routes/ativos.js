@@ -24,7 +24,7 @@ router.get('/:ticker', (req, res) => {
 
 // POST /api/ativos
 router.post('/', (req, res) => {
-  const { ticker, nome, categoria, moeda = 'BRL', nota = 5, percentual_ideal = 0 } = req.body;
+  const { ticker, nome, categoria, moeda = 'BRL', nota = 5, percentual_ideal = 0, preco_atual = 0, atualizacao_manual = false } = req.body;
   if (!ticker || !categoria) {
     return res.status(400).json({ error: 'Campos obrigatórios: ticker, categoria' });
   }
@@ -35,10 +35,10 @@ router.post('/', (req, res) => {
 
   try {
     const stmt = db.prepare(`
-      INSERT INTO ativos (ticker, nome, categoria, moeda, nota, percentual_ideal)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO ativos (ticker, nome, categoria, moeda, nota, percentual_ideal, preco_atual, atualizacao_manual)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `);
-    const info = stmt.run(ticker.toUpperCase(), nome || null, categoria.toUpperCase(), moeda.toUpperCase(), nota, percentual_ideal);
+    const info = stmt.run(ticker.toUpperCase(), nome || null, categoria.toUpperCase(), moeda.toUpperCase(), nota, percentual_ideal, preco_atual, atualizacao_manual ? 1 : 0);
     res.status(201).json(db.prepare('SELECT * FROM ativos WHERE id = ?').get(info.lastInsertRowid));
   } catch (err) {
     if (err.message.includes('UNIQUE')) {
@@ -53,9 +53,9 @@ router.put('/:ticker', (req, res) => {
   const existing = db.prepare('SELECT * FROM ativos WHERE ticker = ?').get(req.params.ticker.toUpperCase());
   if (!existing) return res.status(404).json({ error: 'Ativo não encontrado' });
 
-  const { nome, categoria, moeda, nota, percentual_ideal, ativo } = req.body;
+  const { nome, categoria, moeda, nota, percentual_ideal, ativo, preco_atual, atualizacao_manual } = req.body;
   db.prepare(`
-    UPDATE ativos SET nome=?, categoria=?, moeda=?, nota=?, percentual_ideal=?, ativo=?
+    UPDATE ativos SET nome=?, categoria=?, moeda=?, nota=?, percentual_ideal=?, ativo=?, preco_atual=?, atualizacao_manual=?
     WHERE ticker=?
   `).run(
     nome ?? existing.nome,
@@ -64,6 +64,8 @@ router.put('/:ticker', (req, res) => {
     nota ?? existing.nota,
     percentual_ideal ?? existing.percentual_ideal,
     ativo ?? existing.ativo,
+    preco_atual ?? existing.preco_atual,
+    atualizacao_manual !== undefined ? (atualizacao_manual ? 1 : 0) : existing.atualizacao_manual,
     req.params.ticker.toUpperCase()
   );
   res.json(db.prepare('SELECT * FROM ativos WHERE ticker = ?').get(req.params.ticker.toUpperCase()));

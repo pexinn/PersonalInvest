@@ -36,3 +36,25 @@ Application bundle generation complete. [1.162 seconds]
 Page reload sent to client(s).
 14:40:26 [vite] ✨ new dependencies optimized: @angular/common/locales/pt
 14:40:26 [vite] ✨ optimized dependencies changed. reloading
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names            | Raw size
+main.js             | main             | 14.76 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-TD2AUS5L.js   | ativos-component | 24.54 kB | 
+
+Application bundle generation complete. [1.213 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names            | Raw size
+main.js             | main             | 14.76 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-R2JFXTKM.js   | ativos-component | 28.23 kB | 
+
+Application bundle generation complete. [0.285 seconds]
+
+Page reload sent to client(s).

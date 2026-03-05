@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ApiService } from '../../core/services/api.service';
 
 @Component({
@@ -20,7 +21,8 @@ import { ApiService } from '../../core/services/api.service';
     CommonModule, ReactiveFormsModule,
     MatTableModule, MatPaginatorModule, MatSortModule,
     MatFormFieldModule, MatInputModule, MatSelectModule,
-    MatButtonModule, MatIconModule, MatSnackBarModule, MatSliderModule
+    MatButtonModule, MatIconModule, MatSnackBarModule, MatSliderModule,
+    MatSlideToggleModule
   ],
   templateUrl: './ativos.component.html',
   styleUrl: './ativos.component.scss'
@@ -37,7 +39,7 @@ export class AtivosComponent implements OnInit {
 
   categorias = ['ACOES','FIIS','EUA','FIXA','CRIPTO'];
   moedas = ['BRL','USD'];
-  displayedColumns = ['ticker','nome','categoria','moeda','nota','percentual_ideal','ativo','acoes'];
+  displayedColumns = ['ticker','nome','categoria','moeda','nota','percentual_ideal','preco_atual','ativo','acoes'];
 
   constructor(private api: ApiService, private fb: FormBuilder, private snack: MatSnackBar) {
     this.form = this.fb.group({
@@ -47,7 +49,9 @@ export class AtivosComponent implements OnInit {
       moeda:            ['BRL', Validators.required],
       nota:             [5],
       percentual_ideal: [0],
-      ativo:            [1]
+      ativo:            [1],
+      preco_atual:      [0],
+      atualizacao_manual:[false]
     });
   }
 
@@ -95,7 +99,7 @@ export class AtivosComponent implements OnInit {
   reset() {
     this.editingTicker = null;
     this.showForm = false;
-    this.form.reset({ categoria: 'ACOES', moeda: 'BRL', nota: 5, percentual_ideal: 0, ativo: 1 });
+    this.form.reset({ categoria: 'ACOES', moeda: 'BRL', nota: 5, percentual_ideal: 0, ativo: 1, preco_atual: 0, atualizacao_manual: false });
     this.form.get('ticker')!.enable();
   }
 

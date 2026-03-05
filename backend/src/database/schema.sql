@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS ativos (
   nota INTEGER DEFAULT 5 CHECK(nota BETWEEN 1 AND 10),
   percentual_ideal REAL DEFAULT 0,
   ativo BOOLEAN DEFAULT 1,
+  preco_atual REAL DEFAULT 0,
+  atualizacao_manual BOOLEAN DEFAULT 0,
   criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

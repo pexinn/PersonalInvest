@@ -24,7 +24,9 @@ async function calcularCarteira(categoria = null) {
         THEN SUM(ap.valor_total) / SUM(ap.quantidade)
         ELSE 0
       END AS preco_medio,
-      COALESCE(SUM(ap.valor_total), 0) AS valor_investido_total
+      COALESCE(SUM(ap.valor_total), 0) AS valor_investido_total,
+      a.preco_atual,
+      a.atualizacao_manual
     FROM ativos a
     LEFT JOIN aportes ap ON a.ticker = ap.ticker
     WHERE a.ativo = 1
@@ -48,10 +50,18 @@ async function calcularCarteira(categoria = null) {
   // Calcula valor atual e retorno
   let valorAtualTotal = 0;
   const resultado = ativos.map(a => {
-    const cotacao = cotacoes[a.ticker.toUpperCase()];
-    const precoAtual = cotacao?.preco || 0;
+    let precoAtual = 0;
+    let variacao = 0;
+
+    if (a.atualizacao_manual) {
+      precoAtual = a.preco_atual;
+    } else {
+      const cotacao = cotacoes[a.ticker.toUpperCase()];
+      precoAtual = cotacao && cotacao.preco > 0 ? cotacao.preco : a.preco_atual;
+      variacao = cotacao?.variacao || 0;
+    }
+
     const valorAtual = a.quantidade_total * precoAtual;
-    const variacao = cotacao?.variacao || 0;
     const retornoValor = valorAtual - (a.quantidade_total * a.preco_medio);
     const retornoPct = a.preco_medio > 0 ? ((precoAtual / a.preco_medio) - 1) * 100 : 0;
 

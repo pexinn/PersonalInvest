@@ -7,7 +7,8 @@
 
 let yf;
 try {
-  yf = require('yahoo-finance2').default;
+  const YahooFinance = require('yahoo-finance2').default;
+  yf = new YahooFinance({ suppressNotices: ['yahooSurvey'] });
 } catch (e) {
   console.warn('[Cotações] yahoo-finance2 não instalado, preços não disponíveis');
 }
