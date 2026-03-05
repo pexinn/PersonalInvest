@@ -71,3 +71,41 @@ chunk-DAAANEFX.js   | ativos-component | 28.26 kB |
 Application bundle generation complete. [0.631 seconds]
 
 Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names            | Raw size
+main.js             | main             | 14.76 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-WPLHWH2M.js   | ativos-component | 28.27 kB | 
+
+Application bundle generation complete. [0.511 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names               | Raw size
+main.js             | main                | 14.76 kB | 
+
+Lazy chunk files    | Names               | Raw size
+chunk-3ZGUKPFX.js   | dashboard-component | 18.50 kB | 
+
+Application bundle generation complete. [0.413 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 14.99 kB | 
+
+Application bundle generation complete. [0.172 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 15.37 kB | 
+
+Application bundle generation complete. [0.157 seconds]
+
+Page reload sent to client(s).

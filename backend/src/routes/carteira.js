@@ -43,8 +43,8 @@ async function calcularCarteira(categoria = null) {
   // Filtra só os que têm posição aberta (quantidade > 0)
   const comPosicao = ativos.filter(a => a.quantidade_total > 0);
 
-  // Busca cotações em paralelo
-  const tickers = comPosicao.map(a => a.ticker);
+  // Busca cotações em paralelo apenas para ativos automáticos
+  const tickers = comPosicao.filter(a => !a.atualizacao_manual).map(a => a.ticker);
   const cotacoes = tickers.length > 0 ? await getCotacoes(tickers) : {};
 
   // Calcula valor atual e retorno

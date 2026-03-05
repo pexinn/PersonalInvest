@@ -2,8 +2,9 @@
 
 /**
  * Cotações service - busca preços de ativos usando yahoo-finance2
- * com cache em memória de 15 minutos
+ * com cache em memória de 15 minutos e salva no BD para failover
  */
+const db = require('../database/db');
 
 let yf;
 try {
@@ -48,6 +49,16 @@ async function getCotacao(ticker) {
     };
 
     cache.set(cacheKey, { data, ts: Date.now() });
+
+    // Salva no banco de dados para atuar como failover offline no futuro
+    if (data.preco > 0) {
+      try {
+        db.prepare('UPDATE ativos SET preco_atual = ? WHERE ticker = ? AND atualizacao_manual = 0').run(data.preco, ticker.toUpperCase());
+      } catch (errDb) {
+        console.warn(`[Cotações] Erro ao salvar failover no BD para ${ticker}:`, errDb.message);
+      }
+    }
+
     return data;
   } catch (err) {
     console.warn(`[Cotações] Falha ao buscar ${ticker}:`, err.message);

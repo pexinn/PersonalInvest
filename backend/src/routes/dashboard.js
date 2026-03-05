@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 
     // 2. Todos os tickers com posição (para buscar cotação)
     const tickersComPosicao = db.prepare(`
-      SELECT a.ticker, a.moeda, COALESCE(SUM(ap.quantidade), 0) as qtde
+      SELECT a.ticker, a.moeda, a.preco_atual, a.atualizacao_manual, COALESCE(SUM(ap.quantidade), 0) as qtde
       FROM ativos a
       LEFT JOIN aportes ap ON a.ticker = ap.ticker
       WHERE a.ativo = 1
@@ -31,14 +31,20 @@ router.get('/', async (req, res) => {
       HAVING qtde > 0
     `).all();
 
-    const tickers = tickersComPosicao.map(t => t.ticker);
+    const tickers = tickersComPosicao.filter(t => !t.atualizacao_manual).map(t => t.ticker);
     const cotacoes = tickers.length > 0 ? await getCotacoes(tickers) : {};
 
     // 3. Valor atual por categoria
     const valorAtualPorCategoria = {};
     for (const t of tickersComPosicao) {
-      const cotacao = cotacoes[t.ticker.toUpperCase()];
-      const precoAtual = cotacao?.preco || 0;
+      let precoAtual = 0;
+      if (t.atualizacao_manual) {
+        precoAtual = t.preco_atual;
+      } else {
+        const cotacao = cotacoes[t.ticker.toUpperCase()];
+        precoAtual = cotacao && cotacao.preco > 0 ? cotacao.preco : t.preco_atual;
+      }
+      
       const ativo = db.prepare('SELECT categoria FROM ativos WHERE ticker = ?').get(t.ticker);
       const cat = ativo?.categoria || 'OUTROS';
       valorAtualPorCategoria[cat] = (valorAtualPorCategoria[cat] || 0) + (t.qtde * precoAtual);
