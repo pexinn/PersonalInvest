@@ -34,3 +34,6 @@ lerna-debug.log*
 # Cobertura de testes
 coverage/
 *.lcov
+
+# Dados
+*.csv
