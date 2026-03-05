@@ -25,33 +25,81 @@ import { ApiService } from '../../core/services/api.service';
   ],
   templateUrl: './sugestao.component.html',
   styles: [`
+    .page-header h1 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      color: #3f51b5;
+    }
     .config-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
     }
-    .suggestion-card {
-      margin-top: 30px;
+    .mat-card {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    }
+    .mat-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
     }
     .cat-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
-      padding: 8px;
-      border-radius: 4px;
-      background: rgba(0,0,0,0.03);
+      margin-bottom: 8px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #f8f9fa;
+      border: 1px solid #edf2f7;
+      transition: background 0.2s;
     }
-    .gap-positive { color: #f44336; font-weight: bold; }
-    .gap-negative { color: #4caf50; }
+    .cat-row:hover {
+      background: #f1f3f5;
+    }
+    .gap-positive { color: #d32f2f; font-weight: 600; }
+    .gap-negative { color: #2e7d32; }
     .total-footer {
       display: flex;
       justify-content: space-between;
-      font-weight: bold;
-      margin-top: 15px;
-      padding-top: 10px;
-      border-top: 1px solid #ddd;
+      font-weight: 600;
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e0;
+    }
+    .suggestion-card {
+      margin-top: 24px;
+      border-radius: 12px;
+    }
+    .results-table {
+      width: 100%;
+      margin-top: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th.mat-header-cell {
+      background: #fafafa;
+      font-weight: 600;
+      color: #4a5568;
+    }
+    td.mat-cell {
+      padding: 12px 16px;
+    }
+    .category-details {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .category-details h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #2d3748;
     }
   `]
 })

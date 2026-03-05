@@ -58,51 +58,60 @@
   <mat-card class="suggestion-card animate__animated animate__fadeIn">
     <mat-card-header>
       <mat-card-title>Resultado da Análise</mat-card-title>
-      <mat-card-subtitle>Priorizando rebalanceamento por categoria e ativos com notas mais altas em relação ao patrimônio atual</mat-card-subtitle>
+      <mat-card-subtitle>Priorizando rebalanceamento por categoria e ativos com notas mais altas</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       
       @if (resultado.sugestoes.length === 0) {
-        <div style="padding: 20px; text-align: center;">
-          <mat-icon style="font-size: 48px; width:48px; height:48px; color: #9e9e9e;">info</mat-icon>
-          <p>Nenhuma sugestão gerada. Verifique se os ativos possuem notas configuradas na página de Ativos.</p>
+        <div style="padding: 40px 20px; text-align: center;">
+          <mat-icon style="font-size: 48px; width:48px; height:48px; color: #cbd5e0; margin-bottom: 16px;">info_outline</mat-icon>
+          <p style="color: #718096; font-size: 1.1rem;">Sua carteira já está equilibrada seguindo seus alvos!</p>
+          <small class="text-secondary">Nenhuma sugestão de compra necessária para este valor de aporte.</small>
         </div>
       } @else {
-        <table mat-table [dataSource]="resultado.sugestoes" class="mat-elevation-z1">
-          <ng-container matColumnDef="ticker">
-            <th mat-header-cell *matHeaderCellDef> Ativo </th>
-            <td mat-cell *matCellDef="let s"> <strong>{{ s.ticker }}</strong> </td>
-          </ng-container>
+        <div class="results-table mat-elevation-z1">
+          <table mat-table [dataSource]="resultado.sugestoes">
+            <ng-container matColumnDef="ticker">
+              <th mat-header-cell *matHeaderCellDef> Ativo </th>
+              <td mat-cell *matCellDef="let s"> 
+                <div style="display: flex; flex-direction: column;">
+                  <strong>{{ s.ticker }}</strong>
+                </div>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="categoria">
-            <th mat-header-cell *matHeaderCellDef> Categoria </th>
-            <td mat-cell *matCellDef="let s"> {{ s.categoria }} </td>
-          </ng-container>
+            <ng-container matColumnDef="categoria">
+              <th mat-header-cell *matHeaderCellDef> Categoria </th>
+              <td mat-cell *matCellDef="let s"> 
+                <span class="pi-chip" [class]="'chip-' + s.categoria.toLowerCase()">{{ s.categoria }}</span>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="valor">
-            <th mat-header-cell *matHeaderCellDef> Valor sugerido </th>
-            <td mat-cell *matCellDef="let s" style="color: #4caf50; font-weight: bold;"> {{ s.valor | currency:'BRL' }} </td>
-          </ng-container>
+            <ng-container matColumnDef="valor">
+              <th mat-header-cell *matHeaderCellDef> Valor sugerido </th>
+              <td mat-cell *matCellDef="let s" style="color: #2e7d32; font-weight: 600;"> {{ s.valor | currency:'BRL':'symbol':'1.2-2' }} </td>
+            </ng-container>
 
-          <ng-container matColumnDef="quantidade">
-            <th mat-header-cell *matHeaderCellDef> Qtde aprox. </th>
-            <td mat-cell *matCellDef="let s"> {{ s.quantidade | number:'1.2-4' }} </td>
-          </ng-container>
+            <ng-container matColumnDef="quantidade">
+              <th mat-header-cell *matHeaderCellDef> Qtde aprox. </th>
+              <td mat-cell *matCellDef="let s"> {{ s.quantidade | number:'1.2-4' }} </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="['ticker', 'categoria', 'valor', 'quantidade']"></tr>
-          <tr mat-row *matRowDef="let row; columns: ['ticker', 'categoria', 'valor', 'quantidade'];"></tr>
-        </table>
+            <tr mat-header-row *matHeaderRowDef="['ticker', 'categoria', 'valor', 'quantidade']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['ticker', 'categoria', 'valor', 'quantidade'];"></tr>
+          </table>
+        </div>
       }
 
-      <div style="margin-top: 25px;">
+      <div class="category-details">
         <h3>Situação das Categorias (Gap para Alvo)</h3>
         @for (det of resultado.detalhes_categorias; track det.categoria) {
           <div class="cat-row">
-            <span>{{ det.categoria }}</span>
+            <span style="font-weight: 500;">{{ det.categoria }}</span>
             <div style="text-align: right;">
-              <small>{{ det.atual_pct | number:'1.1-1' }}% -> {{ det.alvo_pct }}%</small>
-              <div [class.gap-positive]="det.gap_valor > 0" [class.gap-negative]="det.gap_valor <= 0" style="font-size: 0.85rem">
-                {{ det.gap_valor > 0 ? 'Faltam R$ ' : 'Excesso R$ ' }} {{ det.gap_valor | number:'1.2-2' }}
+              <small style="color: #718096; margin-right: 8px;">{{ det.atual_pct | number:'1.1-1' }}% &rarr; {{ det.alvo_pct }}%</small>
+              <div [class.gap-positive]="det.gap_valor > 0" [class.gap-negative]="det.gap_valor <= 0" style="font-size: 0.9rem">
+                {{ det.gap_valor > 0 ? '+ R$ ' : '- R$ ' }} {{ (det.gap_valor > 0 ? det.gap_valor : -det.gap_valor) | number:'1.0-0' }}
               </div>
             </div>
           </div>

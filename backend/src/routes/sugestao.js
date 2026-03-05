@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
     // 1. Obter alocação atual (consolidada no dashboard ou aproximada)
     // Para precisão, vamos recalcular o valor atual de cada ativo
-    const ativos = db.prepare(`
+    const allAtivos = db.prepare(`
       SELECT 
         a.ticker, a.categoria, a.moeda, a.nota, a.percentual_ideal as peso_no_ativo,
         COALESCE(SUM(ap.quantidade), 0) as qtde
@@ -24,6 +24,9 @@ router.get('/', async (req, res) => {
       WHERE a.ativo = 1
       GROUP BY a.ticker
     `).all();
+
+    // Filtra apenas ativos que o usuário REALMENTE possui em carteira
+    const ativos = allAtivos.filter(a => a.qtde > 0.000001);
 
     const configAlvo = db.prepare('SELECT * FROM config_alocacao').all();
     const alvosCat = {};

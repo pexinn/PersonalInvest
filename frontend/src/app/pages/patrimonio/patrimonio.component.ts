@@ -48,7 +48,7 @@ export class PatrimonioComponent implements OnInit, AfterViewInit {
     CATEGORIAS_PADRAO.forEach(cat => {
       (this.form.get('itens') as FormArray).push(this.fb.group({
         categoria: [cat, Validators.required],
-        valor: [0, [Validators.required, Validators.min(0)]]
+        valor: [0, [Validators.required]]
       }));
     });
   }
@@ -71,7 +71,13 @@ export class PatrimonioComponent implements OnInit, AfterViewInit {
     const body = {
       data: raw.data instanceof Date ? raw.data.toISOString().split('T')[0] : raw.data,
       descricao: raw.descricao,
-      itens: raw.itens.filter((i: any) => i.valor > 0)
+      itens: raw.itens
+        .filter((i: any) => i.valor !== 0) // Allow negative values, skip only zeros
+        .map((i: any) => ({
+          ...i,
+          // Ensure Dívida is always negative
+          valor: i.categoria === 'Dívida' ? -Math.abs(i.valor) : i.valor
+        }))
     };
     this.api.criarPatrimonio(body).subscribe({
       next: () => { this.snack.open('Snapshot salvo!', '✓', { duration: 2000 }); this.showForm = false; this.load(); },

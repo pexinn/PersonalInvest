@@ -216,3 +216,25 @@ chunk-GIUBNYMI.js   | sugestao-component | 19.98 kB |
 Application bundle generation complete. [0.515 seconds]
 
 Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.96 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-ELZY5VYK.js   | sugestao-component | 21.06 kB | 
+
+Application bundle generation complete. [0.320 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.96 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-FJSUD4V3.js   | sugestao-component | 21.65 kB | 
+
+Application bundle generation complete. [0.157 seconds]
+
+Page reload sent to client(s).
