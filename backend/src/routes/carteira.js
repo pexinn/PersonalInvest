@@ -101,7 +101,7 @@ router.get('/', async (req, res) => {
 router.get('/:categoria', async (req, res) => {
   try {
     const { categoria } = req.params;
-    const validas = ['ACOES', 'FIIS', 'EUA', 'FIXA', 'CRIPTO'];
+    const validas = ['ACOES', 'FIIS', 'EUA', 'FIXA', 'CRIPTO', 'FUNDOS'];
     if (!validas.includes(categoria.toUpperCase())) {
       return res.status(400).json({ error: `Categoria inválida. Use: ${validas.join(', ')}` });
     }

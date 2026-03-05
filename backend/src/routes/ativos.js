@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
   if (!ticker || !categoria) {
     return res.status(400).json({ error: 'Campos obrigatórios: ticker, categoria' });
   }
-  const validas = ['ACOES', 'FIIS', 'EUA', 'FIXA', 'CRIPTO'];
+  const validas = ['ACOES', 'FIIS', 'EUA', 'FIXA', 'CRIPTO', 'FUNDOS'];
   if (!validas.includes(categoria.toUpperCase())) {
     return res.status(400).json({ error: `Categoria inválida. Use: ${validas.join(', ')}` });
   }

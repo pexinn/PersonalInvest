@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     { key: 'FIIS',  label: 'FIIs',       icon: 'business',    color: '#4caf50' },
     { key: 'EUA',   label: 'EUA',        icon: 'public',      color: '#ff9800' },
     { key: 'FIXA',  label: 'Renda Fixa', icon: 'savings',     color: '#e91e63' },
+    { key: 'FUNDOS',label: 'Fundos Ações',icon: 'pie_chart',   color: '#00bcd4' },
     { key: 'CRIPTO',label: 'Cripto',     icon: 'currency_bitcoin', color: '#9c27b0' },
   ];
 

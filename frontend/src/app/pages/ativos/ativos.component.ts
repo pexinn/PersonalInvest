@@ -37,7 +37,7 @@ export class AtivosComponent implements OnInit {
   editingTicker: string | null = null;
   loading = false;
 
-  categorias = ['ACOES','FIIS','EUA','FIXA','CRIPTO'];
+  categorias = ['ACOES','FIIS','EUA','FIXA','CRIPTO','FUNDOS'];
   moedas = ['BRL','USD'];
   displayedColumns = ['ticker','nome','categoria','moeda','nota','percentual_ideal','preco_atual','ativo','acoes'];
 

@@ -31,6 +31,12 @@ export const routes: Routes = [
     title: 'EUA — PersonalInvest'
   },
   {
+    path: 'carteira/fundos',
+    loadComponent: () => import('./pages/carteira/carteira.component').then(m => m.CarteiraComponent),
+    data: { categoria: 'FUNDOS', titulo: 'Fundos de Ações' },
+    title: 'Fundos — PersonalInvest'
+  },
+  {
     path: 'carteira/fixa',
     loadComponent: () => import('./pages/carteira/carteira.component').then(m => m.CarteiraComponent),
     data: { categoria: 'FIXA', titulo: 'Renda Fixa' },
