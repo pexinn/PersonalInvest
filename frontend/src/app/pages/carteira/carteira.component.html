@@ -1,0 +1,122 @@
+<div class="page-header">
+  <h1>
+    <mat-icon>{{ titulo === 'Ações' ? 'trending_up' : titulo === 'FIIs' ? 'business' : titulo === 'EUA (USD)' ? 'public' : 'savings' }}</mat-icon>
+    {{ titulo }}
+  </h1>
+  <button mat-icon-button (click)="refresh()" title="Atualizar cotações" [disabled]="loading">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+
+<!-- Summary KPIs -->
+<div class="kpi-grid" *ngIf="!loading && ativos.length > 0">
+  <div class="kpi-card">
+    <mat-icon class="kpi-icon">account_balance</mat-icon>
+    <span class="kpi-label">Total Investido</span>
+    <span class="kpi-value">{{ totalInvestido | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+  </div>
+  <div class="kpi-card">
+    <mat-icon class="kpi-icon" style="color:#4caf50">show_chart</mat-icon>
+    <span class="kpi-label">Valor Atual</span>
+    <span class="kpi-value">{{ totalAtual | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+  </div>
+  <div class="kpi-card">
+    <mat-icon class="kpi-icon" [style.color]="totalRetorno >= 0 ? '#4caf50' : '#f44336'">
+      {{ totalRetorno >= 0 ? 'arrow_upward' : 'arrow_downward' }}
+    </mat-icon>
+    <span class="kpi-label">Rentabilidade</span>
+    <span class="kpi-value"
+      [class.currency-positive]="totalRetornoPct >= 0"
+      [class.currency-negative]="totalRetornoPct < 0">
+      {{ totalRetornoPct | number:'1.2-2':'pt-BR' }}%
+    </span>
+    <span class="kpi-sub">{{ totalRetorno | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+  </div>
+  <div class="kpi-card">
+    <mat-icon class="kpi-icon">list</mat-icon>
+    <span class="kpi-label">Ativos na Carteira</span>
+    <span class="kpi-value">{{ ativos.length }}</span>
+  </div>
+</div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
+<div class="pi-card" style="color:#f44336; text-align:center; padding:24px" *ngIf="error">{{ error }}</div>
+
+<div class="empty-state pi-card" *ngIf="!loading && ativos.length === 0 && !error">
+  <mat-icon style="font-size:48px;width:48px;height:48px;color:#c5cae9">inbox</mat-icon>
+  <p>Nenhuma posição aberta em {{ titulo }}</p>
+</div>
+
+<!-- Table -->
+<div class="table-container" *ngIf="!loading && ativos.length > 0" style="overflow-x:auto">
+  <table mat-table [dataSource]="ativos" class="carteira-table">
+    <ng-container matColumnDef="ticker">
+      <th mat-header-cell *matHeaderCellDef>Ativo</th>
+      <td mat-cell *matCellDef="let a">
+        <div class="ticker-cell">
+          <strong>{{ a.ticker }}</strong>
+          <span class="text-secondary" style="font-size:0.75rem">{{ a.nome }}</span>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="preco_atual">
+      <th mat-header-cell *matHeaderCellDef>Preço Atual</th>
+      <td mat-cell *matCellDef="let a">
+        <div class="price-cell">
+          {{ a.preco_atual | number:'1.2-2':'pt-BR' }}
+          <span class="variacao" [class.up]="a.variacao_dia_pct > 0" [class.dn]="a.variacao_dia_pct < 0">
+            {{ a.variacao_dia_pct | number:'1.2-2':'pt-BR' }}%
+          </span>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="quantidade_total">
+      <th mat-header-cell *matHeaderCellDef>Qtde</th>
+      <td mat-cell *matCellDef="let a">{{ a.quantidade_total | number:'1.0-4':'pt-BR' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="preco_medio">
+      <th mat-header-cell *matHeaderCellDef>Preço Médio</th>
+      <td mat-cell *matCellDef="let a">{{ a.preco_medio | number:'1.2-4':'pt-BR' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="valor_investido">
+      <th mat-header-cell *matHeaderCellDef>Investido</th>
+      <td mat-cell *matCellDef="let a">{{ a.valor_investido_total | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="valor_atual">
+      <th mat-header-cell *matHeaderCellDef>Atual</th>
+      <td mat-cell *matCellDef="let a"><strong>{{ a.valor_atual | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</strong></td>
+    </ng-container>
+    <ng-container matColumnDef="retorno_pct">
+      <th mat-header-cell *matHeaderCellDef>Retorno</th>
+      <td mat-cell *matCellDef="let a">
+        <div class="retorno-cell"
+          [class.currency-positive]="a.retorno_pct >= 0"
+          [class.currency-negative]="a.retorno_pct < 0">
+          <mat-icon style="font-size:14px;width:14px;height:14px">
+            {{ a.retorno_pct >= 0 ? 'arrow_upward' : 'arrow_downward' }}
+          </mat-icon>
+          {{ a.retorno_pct | number:'1.2-2':'pt-BR' }}%
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="pct_carteira">
+      <th mat-header-cell *matHeaderCellDef>%&nbsp;Carteira</th>
+      <td mat-cell *matCellDef="let a">
+        <div class="pct-bar-cell">
+          <span>{{ a.percentual_carteira | number:'1.1-1':'pt-BR' }}%</span>
+          <div class="pct-bar"><div class="pct-fill" [style.width.%]="a.percentual_carteira"></div></div>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="nota">
+      <th mat-header-cell *matHeaderCellDef>Nota</th>
+      <td mat-cell *matCellDef="let a">
+        <span class="nota-badge" [style.background]="getNotaColor(a.nota)">{{ a.nota }}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

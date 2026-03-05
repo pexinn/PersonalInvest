@@ -1,0 +1,47 @@
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    h1 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+    }
+}
+
+.form-card {
+    margin-bottom: 24px;
+
+    h3 {
+        margin: 0 0 16px;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0 16px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 8px;
+}
+
+.tipo-chip {
+    background: #e8f5e9;
+    color: #388e3c;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}

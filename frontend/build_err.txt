@@ -1,0 +1,100 @@
+
+> frontend@0.0.0 build
+> ng build
+
+- Building...
+
+Application bundle generation failed. [4.934 seconds]
+
+X [ERROR] Could not resolve "../../environments/environment"
+
+    src/app/core/services/api.service.ts:2:28:
+      2 │ import { environment } from '../../environments/environment';
+        ╵                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2307: Cannot find module '../../environments/environment' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/core/services/api.service.ts:4:28:
+      4 │ import { environment } from '../../environments/environment';
+        ╵                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG1: Object is possibly 'null'. [plugin angular-compiler]
+
+    src/app/pages/aportes/aportes.component.html:107:65:
+      107 │ ...ource.filter = $event.target.value.trim().toLowerCase()" place...
+          ╵                                 ~~~~~
+
+  Error occurs in the template of component AportesComponent.
+
+    src/app/pages/aportes/aportes.component.ts:35:15:
+      35 │   templateUrl: './aportes.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG9: Property 'value' does not exist on type 'EventTarget'. [plugin angular-compiler]
+
+    src/app/pages/aportes/aportes.component.html:107:65:
+      107 │ ...ource.filter = $event.target.value.trim().toLowerCase()" place...
+          ╵                                 ~~~~~
+
+  Error occurs in the template of component AportesComponent.
+
+    src/app/pages/aportes/aportes.component.ts:35:15:
+      35 │   templateUrl: './aportes.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG1: Object is possibly 'null'. [plugin angular-compiler]
+
+    src/app/pages/ativos/ativos.component.html:60:65:
+      60 │ ...p)="dataSource.filter = $event.target.value.trim().toLowerCase()">
+         ╵                                          ~~~~~
+
+  Error occurs in the template of component AtivosComponent.
+
+    src/app/pages/ativos/ativos.component.ts:25:15:
+      25 │   templateUrl: './ativos.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG9: Property 'value' does not exist on type 'EventTarget'. [plugin angular-compiler]
+
+    src/app/pages/ativos/ativos.component.html:60:65:
+      60 │ ...p)="dataSource.filter = $event.target.value.trim().toLowerCase()">
+         ╵                                          ~~~~~
+
+  Error occurs in the template of component AtivosComponent.
+
+    src/app/pages/ativos/ativos.component.ts:25:15:
+      25 │   templateUrl: './ativos.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG1: Object is possibly 'null'. [plugin angular-compiler]
+
+    src/app/pages/proventos/proventos.component.html:77:65:
+      77 │ ...p)="dataSource.filter = $event.target.value.trim().toLowerCase()">
+         ╵                                          ~~~~~
+
+  Error occurs in the template of component ProventosComponent.
+
+    src/app/pages/proventos/proventos.component.ts:31:15:
+      31 │   templateUrl: './proventos.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG9: Property 'value' does not exist on type 'EventTarget'. [plugin angular-compiler]
+
+    src/app/pages/proventos/proventos.component.html:77:65:
+      77 │ ...p)="dataSource.filter = $event.target.value.trim().toLowerCase()">
+         ╵                                          ~~~~~
+
+  Error occurs in the template of component ProventosComponent.
+
+    src/app/pages/proventos/proventos.component.ts:31:15:
+      31 │   templateUrl: './proventos.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

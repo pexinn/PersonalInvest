@@ -1,0 +1,95 @@
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    h1 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 48px;
+    color: #9e9e9e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.carteira-table {
+    width: 100%;
+    min-width: 750px;
+}
+
+.ticker-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.variacao {
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    &.up {
+        color: #4caf50;
+    }
+
+    &.dn {
+        color: #f44336;
+    }
+}
+
+.retorno-cell {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.pct-bar-cell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 100px;
+}
+
+.pct-bar {
+    flex: 1;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.pct-fill {
+    height: 100%;
+    background: #3f51b5;
+    border-radius: 2px;
+    transition: width 0.5s;
+}
+
+.nota-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 0.8rem;
+}

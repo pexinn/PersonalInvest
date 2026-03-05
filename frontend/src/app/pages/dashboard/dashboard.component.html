@@ -1,0 +1,104 @@
+<div class="page-header">
+  <h1>
+    <mat-icon>dashboard</mat-icon>
+    Panorama Geral
+  </h1>
+  <span class="text-secondary">{{ dashboard?.resumo ? '' : 'Carregando...' }}</span>
+</div>
+
+<div *ngIf="loading" class="loading-state">
+  <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+  <p class="text-secondary" style="text-align:center;margin-top:12px">Buscando dados e cotações...</p>
+</div>
+
+<div *ngIf="error" class="pi-card" style="color:#f44336; text-align:center; padding:32px;">
+  <mat-icon style="font-size:48px;width:48px;height:48px;">wifi_off</mat-icon>
+  <p>{{ error }}</p>
+  <a mat-raised-button color="primary" routerLink="/aportes">Registrar Aporte</a>
+</div>
+
+<ng-container *ngIf="!loading && !error && dashboard">
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <mat-icon class="kpi-icon">account_balance</mat-icon>
+      <span class="kpi-label">Total Investido</span>
+      <span class="kpi-value">{{ dashboard.resumo.total_investido | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+    </div>
+    <div class="kpi-card">
+      <mat-icon class="kpi-icon" style="color:#4caf50">trending_up</mat-icon>
+      <span class="kpi-label">Valor Atual</span>
+      <span class="kpi-value">{{ dashboard.resumo.total_atual | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+    </div>
+    <div class="kpi-card">
+      <mat-icon class="kpi-icon"
+        [style.color]="dashboard.resumo.retorno_valor >= 0 ? '#4caf50' : '#f44336'">
+        {{ dashboard.resumo.retorno_valor >= 0 ? 'arrow_upward' : 'arrow_downward' }}
+      </mat-icon>
+      <span class="kpi-label">Rentabilidade Total</span>
+      <span class="kpi-value"
+        [class.currency-positive]="dashboard.resumo.retorno_valor >= 0"
+        [class.currency-negative]="dashboard.resumo.retorno_valor < 0">
+        {{ dashboard.resumo.retorno_pct | number:'1.2-2':'pt-BR' }}%
+      </span>
+      <span class="kpi-sub">
+        {{ dashboard.resumo.retorno_valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+      </span>
+    </div>
+    <div class="kpi-card">
+      <mat-icon class="kpi-icon" style="color:#ff9800">payments</mat-icon>
+      <span class="kpi-label">Proventos (Mês)</span>
+      <span class="kpi-value">{{ dashboard.resumo.proventos_mes | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+      <span class="kpi-sub">Ano: {{ dashboard.resumo.proventos_ano | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+    </div>
+  </div>
+
+  <!-- Alocação + Categorias -->
+  <div class="charts-row">
+    <!-- Donut de Alocação -->
+    <div class="pi-card chart-card">
+      <h3>Alocação por Categoria</h3>
+      <div class="chart-wrapper">
+        <canvas #alocacaoChart></canvas>
+      </div>
+    </div>
+
+    <!-- Tabela por categoria -->
+    <div class="pi-card categoria-card">
+      <h3>Por Categoria</h3>
+      <div *ngIf="dashboard.por_categoria?.length === 0" class="empty-state">
+        Nenhum ativo cadastrado ainda.
+        <a mat-button color="primary" routerLink="/ativos">Cadastrar ativo</a>
+      </div>
+      <div class="categoria-list">
+        <div *ngFor="let cat of dashboard.por_categoria" class="categoria-item"
+            [class.zero-pos]="cat.valor_atual === 0">
+          <div class="cat-left">
+            <span class="pi-chip" [class]="'chip-' + cat.categoria.toLowerCase()">
+              {{ cat.categoria }}
+            </span>
+            <div class="cat-values">
+              <span class="cat-atual">{{ cat.valor_atual | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+              <span class="cat-inv text-secondary">Inv: {{ cat.valor_investido | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+            </div>
+          </div>
+          <span class="cat-retorno"
+            [class.currency-positive]="cat.retorno_pct >= 0"
+            [class.currency-negative]="cat.retorno_pct < 0">
+            {{ cat.retorno_pct | number:'1.2-2':'pt-BR' }}%
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico de Aportes -->
+  <div class="pi-card" style="margin-top:16px">
+    <h3>Aportes Mensais (últimos 12 meses)</h3>
+    <div class="chart-wrapper chart-wide">
+      <canvas #evolucaoChart></canvas>
+    </div>
+  </div>
+
+</ng-container>

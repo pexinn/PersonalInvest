@@ -1,0 +1,38 @@
+
+> frontend@0.0.0 start
+> ng serve
+
+- Building...
+
+Initial chunk files | Names                |  Raw size
+styles.css          | styles               |  96.68 kB | 
+polyfills.js        | polyfills            |  88.09 kB | 
+main.js             | main                 |  14.53 kB | 
+chunk-SHAOKUVO.js   | -                    | 938 bytes | 
+
+                    | Initial total        | 200.21 kB
+
+Lazy chunk files    | Names                |  Raw size
+chunk-5CGPPVLV.js   | aportes-component    |  32.87 kB | 
+chunk-2VNOW3L6.js   | proventos-component  |  24.68 kB | 
+chunk-7OR3CDOC.js   | ativos-component     |  24.06 kB | 
+chunk-KIBFRP6Z.js   | carteira-component   |  22.93 kB | 
+chunk-EZI44ZCO.js   | patrimonio-component |  19.16 kB | 
+chunk-UNYXIKZS.js   | dashboard-component  |  18.42 kB | 
+chunk-6675TCCU.js   | -                    |   2.53 kB | 
+
+Application bundle generation complete. [2.592 seconds]
+
+Watch mode enabled. Watching for file changes...
+  ➜  Local:   http://localhost:4200/
+  ➜  press h + enter to show help
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 14.76 kB | 
+
+Application bundle generation complete. [1.162 seconds]
+
+Page reload sent to client(s).
+14:40:26 [vite] ✨ new dependencies optimized: @angular/common/locales/pt
+14:40:26 [vite] ✨ optimized dependencies changed. reloading
