@@ -81,3 +81,72 @@ chunk-AP3F7VR6.js   | carteira-component | 23.25 kB |
 Application bundle generation complete. [0.271 seconds]
 
 Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names                | Raw size
+main.js             | main                 | 15.37 kB | 
+
+Lazy chunk files    | Names                | Raw size
+chunk-RP2QC42X.js   | aportes-component    | 34.78 kB | 
+chunk-VGWNDBCR.js   | ativos-component     | 28.27 kB | 
+chunk-6VX535YE.js   | proventos-component  | 26.83 kB | 
+chunk-L5FPRRGR.js   | carteira-component   | 23.25 kB | 
+chunk-KZA4QAGE.js   | dashboard-component  | 19.86 kB | 
+chunk-7UF2X53H.js   | patrimonio-component | 19.16 kB | 
+chunk-CURX5SAL.js   | -                    |  2.86 kB | 
+
+Application bundle generation complete. [1.270 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.55 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-HEHUZ3Z6.js   | sugestao-component |  1.07 kB | 
+
+Application bundle generation complete. [0.183 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.55 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-FAV5UGCU.js   | sugestao-component |  4.92 kB | 
+
+Application bundle generation complete. [0.289 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.55 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-ZOK3RJBJ.js   | sugestao-component | 20.16 kB | 
+
+Application bundle generation complete. [0.248 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 15.96 kB | 
+
+Application bundle generation complete. [0.248 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.96 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-INKWFE5R.js   | sugestao-component | 20.16 kB | 
+
+Application bundle generation complete. [0.275 seconds]
+
+Page reload sent to client(s).

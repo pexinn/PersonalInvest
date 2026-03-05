@@ -20,6 +20,8 @@ app.use('/api/proventos',  require('./routes/proventos'));
 app.use('/api/patrimonio', require('./routes/patrimonio'));
 app.use('/api/ativos',     require('./routes/ativos'));
 app.use('/api/dashboard',  require('./routes/dashboard'));
+app.use('/api/config',     require('./routes/config'));
+app.use('/api/sugestao',   require('./routes/sugestao'));
 
 // Health check
 app.get('/api/health', (req, res) => {

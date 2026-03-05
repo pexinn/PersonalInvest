@@ -75,4 +75,15 @@ export class ApiService {
   deletarAtivo(ticker: string): Observable<any> {
     return this.http.delete(`${this.base}/ativos/${ticker}`);
   }
+
+  // Configuração e Rebalanceamento
+  getConfigAlocacao(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.base}/config/alocacao`);
+  }
+  salvarConfigAlocacao(body: any): Observable<any> {
+    return this.http.post(`${this.base}/config/alocacao`, body);
+  }
+  getSugestao(valor: number): Observable<any> {
+    return this.http.get(`${this.base}/sugestao`, { params: { valor: valor.toString() } });
+  }
 }

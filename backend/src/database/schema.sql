@@ -66,6 +66,12 @@ CREATE TABLE IF NOT EXISTS patrimonio_itens (
   FOREIGN KEY (snapshot_id) REFERENCES patrimonio_snapshots(id) ON DELETE CASCADE
 );
 
+-- Configuração de alocação alvo por categoria
+CREATE TABLE IF NOT EXISTS config_alocacao (
+  categoria TEXT PRIMARY KEY NOT NULL CHECK(categoria IN ('ACOES','FIIS','EUA','FIXA','CRIPTO','FUNDOS')),
+  percentual_alvo REAL NOT NULL DEFAULT 0
+);
+
 -- Índices para performance
 CREATE INDEX IF NOT EXISTS idx_aportes_ticker ON aportes(ticker);
 CREATE INDEX IF NOT EXISTS idx_aportes_data ON aportes(data);

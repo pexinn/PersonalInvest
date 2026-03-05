@@ -57,5 +57,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/ativos/ativos.component').then(m => m.AtivosComponent),
     title: 'Ativos — PersonalInvest'
   },
+  {
+    path: 'sugestao',
+    loadComponent: () => import('./pages/sugestao/sugestao.component').then(m => m.SugestaoComponent),
+    title: 'Sugestão de Aporte — PersonalInvest'
+  },
   { path: '**', redirectTo: 'dashboard' }
 ];
