@@ -52,6 +52,8 @@ export class AportesComponent implements OnInit {
 
   moedas = ['BRL','USD'];
   total = 0;
+  totalFilteredValue: number | null = null;
+  totalFilteredQuantity: number | null = null;
 
   constructor(private api: ApiService, private fb: FormBuilder, private snack: MatSnackBar) {
     this.form = this.fb.group({
@@ -92,6 +94,8 @@ export class AportesComponent implements OnInit {
       next: (res: any) => {
         this.dataSource.data = res.data;
         this.total = res.total;
+        this.totalFilteredValue = res.sum_valor !== undefined ? res.sum_valor : null;
+        this.totalFilteredQuantity = res.sum_quantidade !== undefined ? res.sum_quantidade : null;
         this.loading = false;
         // Not assigning dataSource.paginator to prevent client-side interfering
       },

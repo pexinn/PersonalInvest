@@ -1,0 +1,240 @@
+{
+  "resumo": {
+    "total_investido": 11901.55,
+    "total_atual": 41785.9874516215,
+    "retorno_valor": 29884.4374516215,
+    "retorno_pct": 251.09702056977034,
+    "proventos_mes": 0,
+    "proventos_ano": 0
+  },
+  "por_categoria": [
+    {
+      "categoria": "FIIS",
+      "moeda": "BRL",
+      "quantidade": 90,
+      "valor_investido": 11901.55,
+      "valor_atual": 14850,
+      "retorno_pct": 24.773663934529544
+    }
+  ],
+  "evolucao_aportes": [
+    {
+      "mes": "2024-03",
+      "aportado": 1033.33,
+      "retirado": 0
+    },
+    {
+      "mes": "2024-04",
+      "aportado": 4249.04,
+      "retirado": 0
+    },
+    {
+      "mes": "2024-05",
+      "aportado": 1065.89,
+      "retirado": 0
+    },
+    {
+      "mes": "2024-06",
+      "aportado": 623.7,
+      "retirado": 0
+    },
+    {
+      "mes": "2024-07",
+      "aportado": 7466.65,
+      "retirado": 0
+    },
+    {
+      "mes": "2024-08",
+      "aportado": 33091.149999999994,
+      "retirado": 0
+    },
+    {
+      "mes": "2024-09",
+      "aportado": 2808.77,
+      "retirado": 2642
+    },
+    {
+      "mes": "2024-10",
+      "aportado": 3569.77,
+      "retirado": 0
+    },
+    {
+      "mes": "2024-11",
+      "aportado": 1550.3899999999999,
+      "retirado": 127501.69
+    },
+    {
+      "mes": "2024-12",
+      "aportado": 15990.45,
+      "retirado": 15373.77
+    },
+    {
+      "mes": "2025-01",
+      "aportado": 5565.987,
+      "retirado": 0
+    },
+    {
+      "mes": "2025-02",
+      "aportado": 4732.99,
+      "retirado": 0
+    },
+    {
+      "mes": "2025-03",
+      "aportado": 11910,
+      "retirado": 13767.189999999999
+    },
+    {
+      "mes": "2025-04",
+      "aportado": 40.87,
+      "retirado": 0
+    },
+    {
+      "mes": "2025-05",
+      "aportado": 8.62,
+      "retirado": 9423.65
+    },
+    {
+      "mes": "2025-06",
+      "aportado": 18.669999999999998,
+      "retirado": 8102.13
+    },
+    {
+      "mes": "2025-07",
+      "aportado": 59.17,
+      "retirado": 0
+    },
+    {
+      "mes": "2025-08",
+      "aportado": 374.92,
+      "retirado": 0
+    },
+    {
+      "mes": "2025-09",
+      "aportado": 119.27,
+      "retirado": 0
+    },
+    {
+      "mes": "2025-10",
+      "aportado": 1167.4,
+      "retirado": 1195.46
+    },
+    {
+      "mes": "2025-11",
+      "aportado": 1261.78,
+      "retirado": 550.7
+    },
+    {
+      "mes": "2025-12",
+      "aportado": 183.28,
+      "retirado": 0
+    },
+    {
+      "mes": "2026-01",
+      "aportado": 280.81,
+      "retirado": 0
+    },
+    {
+      "mes": "2026-02",
+      "aportado": 222.76,
+      "retirado": 0
+    }
+  ],
+  "proventos_mensais": [
+    {
+      "mes": "2024-01",
+      "total": 358.66
+    },
+    {
+      "mes": "2024-02",
+      "total": 425.05
+    },
+    {
+      "mes": "2024-03",
+      "total": 527.46
+    },
+    {
+      "mes": "2024-04",
+      "total": 568.57
+    },
+    {
+      "mes": "2024-05",
+      "total": 423.61
+    },
+    {
+      "mes": "2024-06",
+      "total": 539.67
+    },
+    {
+      "mes": "2024-07",
+      "total": 444.69
+    },
+    {
+      "mes": "2024-08",
+      "total": 586.14
+    },
+    {
+      "mes": "2024-09",
+      "total": 409.11
+    },
+    {
+      "mes": "2024-10",
+      "total": 607.38
+    },
+    {
+      "mes": "2024-11",
+      "total": 471.07
+    },
+    {
+      "mes": "2024-12",
+      "total": 1222.64
+    },
+    {
+      "mes": "2025-01",
+      "total": 146.85000000000002
+    },
+    {
+      "mes": "2025-02",
+      "total": 145.2
+    },
+    {
+      "mes": "2025-03",
+      "total": 322.69
+    },
+    {
+      "mes": "2025-04",
+      "total": 154.83
+    },
+    {
+      "mes": "2025-05",
+      "total": 335.42
+    },
+    {
+      "mes": "2025-06",
+      "total": 153.81
+    },
+    {
+      "mes": "2025-07",
+      "total": 151.59
+    },
+    {
+      "mes": "2025-08",
+      "total": 94.53
+    },
+    {
+      "mes": "2025-09",
+      "total": 90
+    },
+    {
+      "mes": "2025-10",
+      "total": 93.09
+    },
+    {
+      "mes": "2025-11",
+      "total": 90
+    },
+    {
+      "mes": "2025-12",
+      "total": 100.86
+    }
+  ]
+}

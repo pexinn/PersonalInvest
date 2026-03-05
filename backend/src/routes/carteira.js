@@ -40,8 +40,8 @@ async function calcularCarteira(categoria = null) {
 
   const ativos = db.prepare(query).all(...params);
 
-  // Filtra só os que têm posição aberta (quantidade > 1e-8 para ignorar erros de ponto flutuante)
-  const comPosicao = ativos.filter(a => a.quantidade_total > 1e-8);
+  // Filtra só os que têm posição aberta (quantidade > 1e-6 para ignorar erros de ponto flutuante)
+  const comPosicao = ativos.filter(a => a.quantidade_total > 1e-6);
 
   // Busca cotações em paralelo apenas para ativos automáticos
   const tickers = comPosicao.filter(a => !a.atualizacao_manual).map(a => a.ticker);

@@ -25,13 +25,24 @@ router.get('/', (req, res) => {
   query += ' ORDER BY a.data DESC, a.id DESC';
 
   const countQuery = query.replace('SELECT a.*, at.categoria, at.nome', 'SELECT COUNT(*) as total');
-  const total = db.prepare(countQuery).get(...params).total;
+  const baseParams = [...params];
+  const total = db.prepare(countQuery).get(...baseParams).total;
 
   query += ' LIMIT ? OFFSET ?';
   params.push(Number(limit), Number(offset));
 
   const rows = db.prepare(query).all(...params);
-  res.json({ data: rows, total, page: Number(page), limit: Number(limit) });
+
+  let sum_quantidade = null;
+  let sum_valor = null;
+  if (ticker) {
+    const sumQuery = countQuery.replace('COUNT(*) as total', 'SUM(a.quantidade) as sq, SUM(a.valor_total) as sv');
+    const sums = db.prepare(sumQuery).get(...baseParams);
+    sum_quantidade = sums.sq || 0;
+    sum_valor = sums.sv || 0;
+  }
+
+  res.json({ data: rows, total, page: Number(page), limit: Number(limit), sum_quantidade, sum_valor });
 });
 
 // POST /api/aportes - novo lançamento

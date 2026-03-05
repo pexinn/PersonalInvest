@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
       LEFT JOIN aportes ap ON a.ticker = ap.ticker
       WHERE a.ativo = 1
       GROUP BY a.categoria, a.moeda
-      HAVING quantidade > 1e-8
     `).all();
 
     // 2. Todos os tickers com posição (para buscar cotação)
@@ -29,11 +28,19 @@ router.get('/', async (req, res) => {
       LEFT JOIN aportes ap ON a.ticker = ap.ticker
       WHERE a.ativo = 1
       GROUP BY a.ticker
-      HAVING qtde > 1e-8
+      HAVING qtde > 1e-6
     `).all();
 
     const tickers = tickersComPosicao.filter(t => !t.atualizacao_manual).map(t => t.ticker);
-    const cotacoes = tickers.length > 0 ? await getCotacoes(tickers) : {};
+    const hasUSD = tickersComPosicao.some(t => t.moeda === 'USD');
+    const tickersToFetch = [...tickers];
+    if (hasUSD && !tickersToFetch.includes('USDC')) {
+      tickersToFetch.push('USDC');
+    }
+    const cotacoes = tickersToFetch.length > 0 ? await getCotacoes(tickersToFetch) : {};
+
+    const usdQuote = cotacoes['USDC'];
+    const usdToBrl = usdQuote && usdQuote.preco > 0 ? usdQuote.preco : 5.0; // Fallback
 
     // 3. Valor atual por categoria
     const valorAtualPorCategoria = {};
@@ -48,7 +55,13 @@ router.get('/', async (req, res) => {
       
       const ativo = db.prepare('SELECT categoria FROM ativos WHERE ticker = ?').get(t.ticker);
       const cat = ativo?.categoria || 'OUTROS';
-      valorAtualPorCategoria[cat] = (valorAtualPorCategoria[cat] || 0) + (t.qtde * precoAtual);
+      
+      let valorAtivo = t.qtde * precoAtual;
+      if (t.moeda === 'USD') {
+        valorAtivo = valorAtivo * usdToBrl;
+      }
+      
+      valorAtualPorCategoria[cat] = (valorAtualPorCategoria[cat] || 0) + valorAtivo;
     }
 
     // 4. Proventos do mês atual e do ano

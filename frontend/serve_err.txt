@@ -26,3 +26,36 @@ Application bundle generation complete. [3.702 seconds]
 Watch mode enabled. Watching for file changes...
   ➜  Local:   http://localhost:4200/
   ➜  press h + enter to show help
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.37 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-OCCJGD52.js   | carteira-component | 23.04 kB | 
+
+Application bundle generation complete. [1.244 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names             | Raw size
+main.js             | main              | 15.37 kB | 
+
+Lazy chunk files    | Names             | Raw size
+chunk-FCV73PTC.js   | aportes-component | 33.34 kB | 
+
+Application bundle generation complete. [0.467 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names             | Raw size
+main.js             | main              | 15.37 kB | 
+
+Lazy chunk files    | Names             | Raw size
+chunk-GAPM5GO3.js   | aportes-component | 34.78 kB | 
+
+Application bundle generation complete. [0.254 seconds]
+
+Page reload sent to client(s).

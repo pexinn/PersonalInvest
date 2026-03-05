@@ -107,7 +107,13 @@
       <input matInput #filterInput (keyup)="onFilter($event)" placeholder="ex: BOVA11">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-    <span class="text-secondary" style="font-size:0.85rem">{{ total }} lançamentos</span>
+    
+    <div style="display: flex; flex-direction: column; align-items: flex-end;">
+      <span class="text-secondary" style="font-size:0.85rem">{{ total }} lançamentos</span>
+      <span *ngIf="totalFilteredValue !== null" class="text-primary" style="font-size:0.85rem; font-weight: 500;">
+        Resumo do Ativo: <strong style="color: #333;">{{ totalFilteredQuantity | number:'1.0-4':'pt-BR' }}</strong> cotas | Total: <strong style="color: #333;">{{ totalFilteredValue | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
+      </span>
+    </div>
   </div>
 
   <div style="overflow-x:auto">
