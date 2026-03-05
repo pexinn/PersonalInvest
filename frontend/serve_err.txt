@@ -58,3 +58,16 @@ chunk-R2JFXTKM.js   | ativos-component | 28.23 kB |
 Application bundle generation complete. [0.285 seconds]
 
 Page reload sent to client(s).
+15:17:09 [vite] ✨ new dependencies optimized: @angular/material/slide-toggle
+15:17:09 [vite] ✨ optimized dependencies changed. reloading
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names            | Raw size
+main.js             | main             | 14.76 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-DAAANEFX.js   | ativos-component | 28.26 kB | 
+
+Application bundle generation complete. [0.631 seconds]
+
+Page reload sent to client(s).

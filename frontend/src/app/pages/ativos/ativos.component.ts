@@ -71,7 +71,8 @@ export class AtivosComponent implements OnInit {
 
   submit() {
     if (this.form.invalid) return;
-    const raw = { ...this.form.value, ticker: this.form.value.ticker.toUpperCase() };
+    const formValue = this.form.getRawValue();
+    const raw = { ...formValue, ticker: formValue.ticker.toUpperCase() };
     const obs = this.editingTicker
       ? this.api.editarAtivo(this.editingTicker, raw)
       : this.api.criarAtivo(raw);
