@@ -39,7 +39,7 @@ export class AtivosComponent implements OnInit {
 
   categorias = ['ACOES','FIIS','EUA','FIXA','CRIPTO','FUNDOS'];
   moedas = ['BRL','USD'];
-  displayedColumns = ['ticker','nome','categoria','moeda','nota','percentual_ideal','preco_atual','ativo','acoes'];
+  displayedColumns = ['ticker','nome','categoria','moeda','nota','preco_atual','ativo','acoes'];
 
   constructor(private api: ApiService, private fb: FormBuilder, private snack: MatSnackBar) {
     this.form = this.fb.group({
@@ -48,7 +48,6 @@ export class AtivosComponent implements OnInit {
       categoria:        ['ACOES', Validators.required],
       moeda:            ['BRL', Validators.required],
       nota:             [5],
-      percentual_ideal: [0],
       ativo:            [1],
       preco_atual:      [0],
       atualizacao_manual:[false]
@@ -100,7 +99,7 @@ export class AtivosComponent implements OnInit {
   reset() {
     this.editingTicker = null;
     this.showForm = false;
-    this.form.reset({ categoria: 'ACOES', moeda: 'BRL', nota: 5, percentual_ideal: 0, ativo: 1, preco_atual: 0, atualizacao_manual: false });
+    this.form.reset({ categoria: 'ACOES', moeda: 'BRL', nota: 5, ativo: 1, preco_atual: 0, atualizacao_manual: false });
     this.form.get('ticker')!.enable();
   }
 

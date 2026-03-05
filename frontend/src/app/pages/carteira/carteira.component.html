@@ -117,6 +117,12 @@
         <span class="nota-badge" [style.background]="getNotaColor(a.nota)">{{ a.nota }}</span>
       </td>
     </ng-container>
+    <ng-container matColumnDef="pct_ideal">
+      <th mat-header-cell *matHeaderCellDef>%&nbsp;Ideal&nbsp;(Ref)</th>
+      <td mat-cell *matCellDef="let a">
+         {{ totalNotas > 0 ? ((a.nota / totalNotas) * 100 | number:'1.1-1':'pt-BR') : '0' }}%
+      </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

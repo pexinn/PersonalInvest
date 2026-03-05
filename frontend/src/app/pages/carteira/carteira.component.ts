@@ -26,7 +26,7 @@ export class CarteiraComponent implements OnInit {
   ativos: any[] = [];
   loading = false;
   error = '';
-  displayedColumns = ['ticker','preco_atual','quantidade_total','preco_medio','valor_investido','valor_atual','retorno_pct','pct_carteira','nota'];
+  displayedColumns = ['ticker','preco_atual','quantidade_total','preco_medio','valor_investido','valor_atual','retorno_pct','pct_carteira','nota','pct_ideal'];
 
   constructor(private api: ApiService, private route: ActivatedRoute) {}
 
@@ -64,6 +64,7 @@ export class CarteiraComponent implements OnInit {
   get totalAtual()     { return this.ativos.reduce((s, a) => s + (a.valor_atual || 0), 0); }
   get totalRetorno()   { return this.totalAtual - this.totalInvestido; }
   get totalRetornoPct(){ return this.totalInvestido > 0 ? (this.totalRetorno / this.totalInvestido) * 100 : 0; }
+  get totalNotas()     { return this.ativos.reduce((s, a) => s + (a.nota || 0), 0); }
 
   getMoedaCurrency(moeda: string) { return moeda === 'USD' ? 'USD' : 'BRL'; }
   getNotaColor(nota: number) {

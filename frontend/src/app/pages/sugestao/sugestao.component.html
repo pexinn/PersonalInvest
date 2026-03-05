@@ -13,13 +13,15 @@
       <mat-card-subtitle>Defina quanto % do seu dinheiro você quer em cada categoria</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content style="padding-top: 15px;">
-      <div *ngFor="let c of configs" class="cat-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-        <span style="flex: 1; font-weight: 500;">{{ c.categoria }}</span>
-        <mat-form-field appearance="outline" style="width: 100px;" subscriptSizing="dynamic">
-          <input matInput type="number" [(ngModel)]="c.percentual_alvo" (change)="calcular()">
-          <span matSuffix>%</span>
-        </mat-form-field>
-      </div>
+      @for (c of configs; track c.categoria) {
+        <div class="cat-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+          <span style="flex: 1; font-weight: 500;">{{ c.categoria }}</span>
+          <mat-form-field appearance="outline" style="width: 100px;" subscriptSizing="dynamic">
+            <input matInput type="number" [(ngModel)]="c.percentual_alvo" (change)="calcular()">
+            <span matSuffix>%</span>
+          </mat-form-field>
+        </div>
+      }
 
       <div class="total-footer" [style.color]="totalConfig === 100 ? '#4caf50' : '#f44336'">
         <span>Total configurado:</span>
@@ -52,55 +54,61 @@
 </div>
 
 <!-- 3. Resultados -->
-<mat-card *ngIf="resultado" class="suggestion-card animate__animated animate__fadeIn">
-  <mat-card-header>
-    <mat-card-title>Resultado da Análise</mat-card-title>
-    <mat-card-subtitle>Priorizando rebalanceamento por categoria e ativos com menor peso relativo</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    
-    <div *ngIf="resultado.sugestoes.length === 0" style="padding: 20px; text-align: center;">
-      <mat-icon style="font-size: 48px; width:48px; height:48px; color: #9e9e9e;">info</mat-icon>
-      <p>Nenhuma sugestão gerada. Verifique se os pesos dos ativos estão configurados na página de Ativos.</p>
-    </div>
-
-    <table mat-table [dataSource]="resultado.sugestoes" class="mat-elevation-z1" *ngIf="resultado.sugestoes.length > 0">
-      <ng-container matColumnDef="ticker">
-        <th mat-header-cell *matHeaderCellDef> Ativo </th>
-        <td mat-cell *matCellDef="let s"> <strong>{{ s.ticker }}</strong> </td>
-      </ng-container>
-
-      <ng-container matColumnDef="categoria">
-        <th mat-header-cell *matHeaderCellDef> Categoria </th>
-        <td mat-cell *matCellDef="let s"> {{ s.categoria }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="valor">
-        <th mat-header-cell *matHeaderCellDef> Valor sugerido </th>
-        <td mat-cell *matCellDef="let s" style="color: #4caf50; font-weight: bold;"> {{ s.valor | currency:'BRL' }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="quantidade">
-        <th mat-header-cell *matHeaderCellDef> Qtde aprox. </th>
-        <td mat-cell *matCellDef="let s"> {{ s.quantidade | number:'1.2-4' }} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="['ticker', 'categoria', 'valor', 'quantidade']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['ticker', 'categoria', 'valor', 'quantidade'];"></tr>
-    </table>
-
-    <div style="margin-top: 25px;">
-      <h3>Situação das Categorias (Gap para Alvo)</h3>
-      <div *ngFor="let det of resultado.detalhes_categorias" class="cat-row">
-        <span>{{ det.categoria }}</span>
-        <div style="text-align: right;">
-          <small>{{ det.atual_pct | number:'1.1-1' }}% -> {{ det.alvo_pct }}%</small>
-          <div [class.gap-positive]="det.gap_valor > 0" [class.gap-negative]="det.gap_valor <= 0" style="font-size: 0.85rem">
-            {{ det.gap_valor > 0 ? 'Faltam R$ ' : 'Excesso R$ ' }} {{ det.gap_valor | number:'1.2-2' }}
-          </div>
+@if (resultado) {
+  <mat-card class="suggestion-card animate__animated animate__fadeIn">
+    <mat-card-header>
+      <mat-card-title>Resultado da Análise</mat-card-title>
+      <mat-card-subtitle>Priorizando rebalanceamento por categoria e ativos com notas mais altas em relação ao patrimônio atual</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      
+      @if (resultado.sugestoes.length === 0) {
+        <div style="padding: 20px; text-align: center;">
+          <mat-icon style="font-size: 48px; width:48px; height:48px; color: #9e9e9e;">info</mat-icon>
+          <p>Nenhuma sugestão gerada. Verifique se os ativos possuem notas configuradas na página de Ativos.</p>
         </div>
-      </div>
-    </div>
+      } @else {
+        <table mat-table [dataSource]="resultado.sugestoes" class="mat-elevation-z1">
+          <ng-container matColumnDef="ticker">
+            <th mat-header-cell *matHeaderCellDef> Ativo </th>
+            <td mat-cell *matCellDef="let s"> <strong>{{ s.ticker }}</strong> </td>
+          </ng-container>
 
-  </mat-card-content>
-</mat-card>
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef> Categoria </th>
+            <td mat-cell *matCellDef="let s"> {{ s.categoria }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef> Valor sugerido </th>
+            <td mat-cell *matCellDef="let s" style="color: #4caf50; font-weight: bold;"> {{ s.valor | currency:'BRL' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantidade">
+            <th mat-header-cell *matHeaderCellDef> Qtde aprox. </th>
+            <td mat-cell *matCellDef="let s"> {{ s.quantidade | number:'1.2-4' }} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['ticker', 'categoria', 'valor', 'quantidade']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['ticker', 'categoria', 'valor', 'quantidade'];"></tr>
+        </table>
+      }
+
+      <div style="margin-top: 25px;">
+        <h3>Situação das Categorias (Gap para Alvo)</h3>
+        @for (det of resultado.detalhes_categorias; track det.categoria) {
+          <div class="cat-row">
+            <span>{{ det.categoria }}</span>
+            <div style="text-align: right;">
+              <small>{{ det.atual_pct | number:'1.1-1' }}% -> {{ det.alvo_pct }}%</small>
+              <div [class.gap-positive]="det.gap_valor > 0" [class.gap-negative]="det.gap_valor <= 0" style="font-size: 0.85rem">
+                {{ det.gap_valor > 0 ? 'Faltam R$ ' : 'Excesso R$ ' }} {{ det.gap_valor | number:'1.2-2' }}
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+}

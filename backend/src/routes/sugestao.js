@@ -91,15 +91,15 @@ router.get('/', async (req, res) => {
       if (valorParaEstaCat <= 0) continue;
 
       // Dentro da categoria, distribuir pelos ativos
-      // Usamos o peso_no_ativo (0-100) para definir a meta interna
-      const totalPesoAtivos = catInfo.ativos.reduce((s, a) => s + a.peso_no_ativo, 0);
+      // Usamos a nota do ativo (1-10) para definir a meta interna relativa à soma das notas
+      const totalNotasAtivos = catInfo.ativos.reduce((s, a) => s + (a.nota || 0), 0);
       
-      if (totalPesoAtivos > 0) {
+      if (totalNotasAtivos > 0) {
         // Alvo total para a categoria após o aporte específico
         const novoTotalCat = catInfo.atual + valorParaEstaCat;
         
         const ativosComGap = catInfo.ativos.map(a => {
-          const alvoAtivo = novoTotalCat * (a.peso_no_ativo / totalPesoAtivos);
+          const alvoAtivo = novoTotalCat * ((a.nota || 0) / totalNotasAtivos);
           return {
             ...a,
             gap_ativo: alvoAtivo - a.valor_atual

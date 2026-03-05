@@ -85,8 +85,7 @@ export class PatrimonioComponent implements OnInit, AfterViewInit {
   }
 
   getTotal(snap: any) {
-    return snap.itens?.filter((i: any) => i.categoria !== 'Dívida')
-      .reduce((s: number, i: any) => s + i.valor, 0) || 0;
+    return snap.itens?.reduce((s: number, i: any) => s + i.valor, 0) || 0;
   }
 
   buildChart() {
