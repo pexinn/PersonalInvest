@@ -49,7 +49,31 @@ async function getCotacao(ticker) {
       symbol = symbol + '.SA';
     }
 
-    const result = await yf.quote(symbol);
+    let result;
+    if (symbol === 'USDCBRL=X') {
+      try {
+        result = await yf.quote('USDCBRL=X');
+        if (!result || !result.regularMarketPrice) throw new Error('Falha no get direto');
+      } catch (e) {
+        // Fallback para USDC-USD e BRL=X
+        const usdc = await yf.quote('USDC-USD');
+        const brl = await yf.quote('BRL=X');
+        if (usdc && brl && usdc.regularMarketPrice && brl.regularMarketPrice) {
+          result = {
+            regularMarketPrice: usdc.regularMarketPrice * brl.regularMarketPrice,
+            currency: 'BRL',
+            regularMarketChangePercent: usdc.regularMarketChangePercent,
+            longName: 'USD Coin (Converted)',
+            shortName: 'USDC'
+          };
+        } else {
+          throw new Error('Fallback failed');
+        }
+      }
+    } else {
+      result = await yf.quote(symbol);
+    }
+
     const data = {
       ticker,
       preco: result.regularMarketPrice || 0,
