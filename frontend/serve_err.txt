@@ -238,3 +238,25 @@ chunk-FJSUD4V3.js   | sugestao-component | 21.65 kB |
 Application bundle generation complete. [0.157 seconds]
 
 Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names                | Raw size
+main.js             | main                 | 15.96 kB | 
+
+Lazy chunk files    | Names                | Raw size
+chunk-NTAM4IUJ.js   | patrimonio-component | 19.31 kB | 
+
+Application bundle generation complete. [0.632 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names                | Raw size
+main.js             | main                 | 15.96 kB | 
+
+Lazy chunk files    | Names                | Raw size
+chunk-FEMYAZ5U.js   | patrimonio-component | 19.29 kB | 
+
+Application bundle generation complete. [0.421 seconds]
+
+Page reload sent to client(s).
