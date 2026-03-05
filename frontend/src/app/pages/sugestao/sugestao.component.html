@@ -12,13 +12,13 @@
       <mat-card-title>Configurar Alocação Alvo</mat-card-title>
       <mat-card-subtitle>Defina quanto % do seu dinheiro você quer em cada categoria</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content style="padding-top: 15px;">
+    <mat-card-content style="padding: 10px 16px;">
       @for (c of configs; track c.categoria) {
-        <div class="cat-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+        <div class="cat-row">
           <span style="flex: 1; font-weight: 500;">{{ c.categoria }}</span>
-          <mat-form-field appearance="outline" style="width: 100px;" subscriptSizing="dynamic">
+          <mat-form-field appearance="outline" style="width: 85px;" subscriptSizing="dynamic">
             <input matInput type="number" [(ngModel)]="c.percentual_alvo" (change)="calcular()">
-            <span matSuffix>%</span>
+            <span matSuffix class="percent-suffix">%</span>
           </mat-form-field>
         </div>
       }

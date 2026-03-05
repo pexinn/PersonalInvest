@@ -34,31 +34,38 @@ import { ApiService } from '../../core/services/api.service';
     }
     .config-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin-bottom: 24px;
+      grid-template-columns: 380px 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 800px) {
+      .config-grid { grid-template-columns: 1fr; }
     }
     .mat-card {
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
     }
+    .mat-card-header { padding: 12px 16px 0; }
     .mat-card-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
     }
+    .mat-card-subtitle { font-size: 0.8rem; }
     .cat-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-      padding: 10px 16px;
-      border-radius: 8px;
+      margin-bottom: 4px;
+      padding: 6px 12px;
+      border-radius: 6px;
       background: #f8f9fa;
       border: 1px solid #edf2f7;
-      transition: background 0.2s;
     }
-    .cat-row:hover {
-      background: #f1f3f5;
+    .percent-suffix {
+      padding-left: 8px;
+      color: #718096;
+      font-weight: 500;
+      font-size: 0.9rem;
     }
     .gap-positive { color: #d32f2f; font-weight: 600; }
     .gap-negative { color: #2e7d32; }
@@ -66,19 +73,20 @@ import { ApiService } from '../../core/services/api.service';
       display: flex;
       justify-content: space-between;
       font-weight: 600;
-      margin-top: 16px;
-      padding: 12px 16px;
+      margin-top: 12px;
+      padding: 8px 12px;
       background: #fff;
-      border-radius: 8px;
+      border-radius: 6px;
       border: 1px dashed #cbd5e0;
+      font-size: 0.9rem;
     }
     .suggestion-card {
-      margin-top: 24px;
+      margin-top: 20px;
       border-radius: 12px;
     }
     .results-table {
       width: 100%;
-      margin-top: 16px;
+      margin-top: 12px;
       border-radius: 8px;
       overflow: hidden;
     }
@@ -86,19 +94,20 @@ import { ApiService } from '../../core/services/api.service';
       background: #fafafa;
       font-weight: 600;
       color: #4a5568;
+      padding: 8px 16px;
     }
     td.mat-cell {
-      padding: 12px 16px;
+      padding: 8px 16px;
     }
     .category-details {
-      margin-top: 32px;
-      padding-top: 24px;
+      margin-top: 24px;
+      padding-top: 16px;
       border-top: 1px solid #e2e8f0;
     }
     .category-details h3 {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       color: #2d3748;
     }
   `]

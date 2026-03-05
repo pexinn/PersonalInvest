@@ -260,3 +260,58 @@ chunk-FEMYAZ5U.js   | patrimonio-component | 19.29 kB |
 Application bundle generation complete. [0.421 seconds]
 
 Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names                | Raw size
+main.js             | main                 | 15.96 kB | 
+
+Lazy chunk files    | Names                | Raw size
+chunk-OA7WSR2M.js   | patrimonio-component | 19.48 kB | 
+
+Application bundle generation complete. [0.410 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names                | Raw size
+main.js             | main                 | 15.96 kB | 
+
+Lazy chunk files    | Names                | Raw size
+chunk-4X7QI43B.js   | patrimonio-component | 19.56 kB | 
+
+Application bundle generation complete. [0.345 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names                | Raw size
+main.js             | main                 | 15.96 kB | 
+
+Lazy chunk files    | Names                | Raw size
+chunk-MGUDNPM7.js   | patrimonio-component | 19.63 kB | 
+
+Application bundle generation complete. [0.360 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.96 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-4AVC3HUY.js   | sugestao-component | 21.93 kB | 
+
+Application bundle generation complete. [0.303 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.96 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-LNFQS5LT.js   | sugestao-component | 21.85 kB | 
+
+Application bundle generation complete. [0.152 seconds]
+
+Page reload sent to client(s).

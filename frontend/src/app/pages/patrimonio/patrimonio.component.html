@@ -25,11 +25,11 @@
 
     <div class="itens-grid" formArrayName="itens">
       <div *ngFor="let item of itens.controls; let i = index" [formGroupName]="i" class="item-row">
-        <mat-form-field appearance="outline" class="cat-field">
+        <mat-form-field appearance="outline" class="cat-field" subscriptSizing="dynamic">
           <mat-label>Categoria</mat-label>
-          <input matInput formControlName="categoria">
+          <input matInput formControlName="categoria" readonly>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="val-field">
+        <mat-form-field appearance="outline" class="val-field" subscriptSizing="dynamic">
           <mat-label>Valor (R$)</mat-label>
           <span matTextPrefix>R$&nbsp;</span>
           <input matInput type="number" formControlName="valor" step="100">
