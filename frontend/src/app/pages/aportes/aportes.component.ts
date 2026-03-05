@@ -48,6 +48,7 @@ export class AportesComponent implements OnInit {
   loading = false;
   showForm = false;
   editingId: number | null = null;
+  tickerFilter = '';
 
   moedas = ['BRL','USD'];
   total = 0;
@@ -77,20 +78,32 @@ export class AportesComponent implements OnInit {
     });
   }
 
-  loadAportes(page = 0, limit = 50) {
+  loadAportes() {
     this.loading = true;
-    this.api.getAportes({ page: page + 1, limit }).subscribe({
+    const page = this.paginator ? this.paginator.pageIndex : 0;
+    const limit = this.paginator ? this.paginator.pageSize : 50;
+
+    const params: any = { page: page + 1, limit };
+    if (this.tickerFilter) {
+      params.ticker = this.tickerFilter;
+    }
+
+    this.api.getAportes(params).subscribe({
       next: (res: any) => {
         this.dataSource.data = res.data;
         this.total = res.total;
         this.loading = false;
-        setTimeout(() => {
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-        });
+        // Not assigning dataSource.paginator to prevent client-side interfering
       },
       error: () => { this.loading = false; }
     });
+  }
+
+  onFilter(event: Event) {
+    const val = (event.target as HTMLInputElement).value;
+    this.tickerFilter = val.trim().toUpperCase();
+    if (this.paginator) this.paginator.pageIndex = 0;
+    this.loadAportes();
   }
 
   setupTickerAutocomplete() {

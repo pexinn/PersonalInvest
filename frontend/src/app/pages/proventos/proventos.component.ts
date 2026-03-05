@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -21,7 +21,7 @@ import { Observable, startWith, map } from 'rxjs';
   selector: 'app-proventos',
   standalone: true,
   imports: [
-    CommonModule, CurrencyPipe, DatePipe, ReactiveFormsModule,
+    CommonModule, CurrencyPipe, DatePipe, ReactiveFormsModule, FormsModule,
     MatTableModule, MatPaginatorModule, MatSortModule,
     MatFormFieldModule, MatInputModule, MatSelectModule,
     MatButtonModule, MatIconModule, MatSnackBarModule,
@@ -44,6 +44,9 @@ export class ProventosComponent implements OnInit {
   totalGeral = 0;
   ativos: any[] = [];
   filteredTickers: Observable<string[]> | undefined;
+  
+  mesFilter = '';
+  tickerFilter = '';
 
   tipos = ['Dividendo','JCP','Rendimento','Aluguel','Outros'];
   displayedColumns = ['data_pagamento','ticker','tipo','corretora','valor','acoes'];
@@ -76,16 +79,28 @@ export class ProventosComponent implements OnInit {
 
   load() {
     this.loading = true;
-    this.api.getProventos({ limit: 200 }).subscribe({
+    const page = this.paginator ? this.paginator.pageIndex : 0;
+    const limit = this.paginator ? this.paginator.pageSize : 50;
+    const params: any = { page: page + 1, limit };
+    
+    if (this.mesFilter) params.mes = this.mesFilter;
+    if (this.tickerFilter) params.ticker = this.tickerFilter;
+
+    this.api.getProventos(params).subscribe({
       next: (res: any) => {
         this.dataSource.data = res.data;
         this.total = res.total;
         this.totalGeral = res.data.reduce((s: number, r: any) => s + r.valor, 0);
         this.loading = false;
-        setTimeout(() => { this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator; });
+        // Don't assign this.dataSource.paginator here to keep it server-side mapping
       },
       error: () => { this.loading = false; }
     });
+  }
+
+  onFilterChange() {
+    if (this.paginator) this.paginator.pageIndex = 0;
+    this.load();
   }
 
   submit() {

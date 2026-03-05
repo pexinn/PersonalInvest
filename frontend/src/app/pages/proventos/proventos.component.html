@@ -71,12 +71,20 @@
 
 <!-- Table -->
 <div class="table-container" style="overflow-x:auto">
-  <div style="padding:12px 16px 0">
-    <mat-form-field appearance="outline" style="width:260px">
-      <mat-label>Filtrar</mat-label>
-      <input matInput #filterInput (keyup)="dataSource.filter = filterInput.value.trim().toLowerCase()">
+  <div style="padding:12px 16px 0; display:flex; gap:16px; align-items: center; flex-wrap: wrap;">
+    <mat-form-field appearance="outline" style="width:200px; margin-bottom: -1.25em;">
+      <mat-label>Mês (AAAA-MM)</mat-label>
+      <input matInput [(ngModel)]="mesFilter" (keyup.enter)="onFilterChange()" placeholder="ex: 2026-01">
+      <mat-icon matSuffix>calendar_today</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width:200px; margin-bottom: -1.25em;">
+      <mat-label>Ticker</mat-label>
+      <input matInput [(ngModel)]="tickerFilter" (keyup.enter)="onFilterChange()" placeholder="ex: MXRF11">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
+    
+    <button mat-flat-button color="primary" (click)="onFilterChange()" style="height:48px;">Filtrar</button>
   </div>
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="data_pagamento">
@@ -113,5 +121,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[25,50,100]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [length]="total" [pageSizeOptions]="[25,50,100]" showFirstLastButtons (page)="load()"></mat-paginator>
 </div>

@@ -7,105 +7,22 @@
 Initial chunk files | Names                |  Raw size
 styles.css          | styles               |  96.68 kB | 
 polyfills.js        | polyfills            |  88.09 kB | 
-main.js             | main                 |  14.53 kB | 
+main.js             | main                 |  15.37 kB | 
 chunk-SHAOKUVO.js   | -                    | 938 bytes | 
 
-                    | Initial total        | 200.21 kB
+                    | Initial total        | 201.05 kB
 
 Lazy chunk files    | Names                |  Raw size
-chunk-5CGPPVLV.js   | aportes-component    |  32.87 kB | 
-chunk-2VNOW3L6.js   | proventos-component  |  24.68 kB | 
-chunk-7OR3CDOC.js   | ativos-component     |  24.06 kB | 
+chunk-MCUS3OPP.js   | aportes-component    |  33.09 kB | 
+chunk-WPLHWH2M.js   | ativos-component     |  28.27 kB | 
+chunk-6N3UCBGE.js   | proventos-component  |  26.83 kB | 
 chunk-KIBFRP6Z.js   | carteira-component   |  22.93 kB | 
+chunk-DMYP5VRN.js   | dashboard-component  |  19.86 kB | 
 chunk-EZI44ZCO.js   | patrimonio-component |  19.16 kB | 
-chunk-UNYXIKZS.js   | dashboard-component  |  18.42 kB | 
 chunk-6675TCCU.js   | -                    |   2.53 kB | 
 
-Application bundle generation complete. [2.592 seconds]
+Application bundle generation complete. [3.702 seconds]
 
 Watch mode enabled. Watching for file changes...
   ➜  Local:   http://localhost:4200/
   ➜  press h + enter to show help
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names | Raw size
-main.js             | main  | 14.76 kB | 
-
-Application bundle generation complete. [1.162 seconds]
-
-Page reload sent to client(s).
-14:40:26 [vite] ✨ new dependencies optimized: @angular/common/locales/pt
-14:40:26 [vite] ✨ optimized dependencies changed. reloading
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names            | Raw size
-main.js             | main             | 14.76 kB | 
-
-Lazy chunk files    | Names            | Raw size
-chunk-TD2AUS5L.js   | ativos-component | 24.54 kB | 
-
-Application bundle generation complete. [1.213 seconds]
-
-Page reload sent to client(s).
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names            | Raw size
-main.js             | main             | 14.76 kB | 
-
-Lazy chunk files    | Names            | Raw size
-chunk-R2JFXTKM.js   | ativos-component | 28.23 kB | 
-
-Application bundle generation complete. [0.285 seconds]
-
-Page reload sent to client(s).
-15:17:09 [vite] ✨ new dependencies optimized: @angular/material/slide-toggle
-15:17:09 [vite] ✨ optimized dependencies changed. reloading
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names            | Raw size
-main.js             | main             | 14.76 kB | 
-
-Lazy chunk files    | Names            | Raw size
-chunk-DAAANEFX.js   | ativos-component | 28.26 kB | 
-
-Application bundle generation complete. [0.631 seconds]
-
-Page reload sent to client(s).
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names            | Raw size
-main.js             | main             | 14.76 kB | 
-
-Lazy chunk files    | Names            | Raw size
-chunk-WPLHWH2M.js   | ativos-component | 28.27 kB | 
-
-Application bundle generation complete. [0.511 seconds]
-
-Page reload sent to client(s).
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names               | Raw size
-main.js             | main                | 14.76 kB | 
-
-Lazy chunk files    | Names               | Raw size
-chunk-3ZGUKPFX.js   | dashboard-component | 18.50 kB | 
-
-Application bundle generation complete. [0.413 seconds]
-
-Page reload sent to client(s).
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names | Raw size
-main.js             | main  | 14.99 kB | 
-
-Application bundle generation complete. [0.172 seconds]
-
-Page reload sent to client(s).
-- Changes detected. Rebuilding...
-
-Initial chunk files | Names | Raw size
-main.js             | main  | 15.37 kB | 
-
-Application bundle generation complete. [0.157 seconds]
-
-Page reload sent to client(s).

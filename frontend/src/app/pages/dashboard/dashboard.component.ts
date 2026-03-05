@@ -25,6 +25,7 @@ Chart.register(...registerables);
 export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('alocacaoChart') alocacaoChartRef!: ElementRef;
   @ViewChild('evolucaoChart') evolucaoChartRef!: ElementRef;
+  @ViewChild('proventosChart') proventosChartRef!: ElementRef;
 
   dashboard: any = null;
   loading = true;
@@ -143,6 +144,35 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         }
       });
       this.charts.push(chart2);
+    }
+
+    // Gráfico de proventos mensais
+    const proventos = this.dashboard.proventos_mensais?.slice(-12) || [];
+    if (proventos.length > 0 && this.proventosChartRef) {
+      const chart3 = new Chart(this.proventosChartRef.nativeElement, {
+        type: 'bar',
+        data: {
+          labels: proventos.map((p: any) => p.mes),
+          datasets: [{
+            label: 'Proventos',
+            data: proventos.map((p: any) => p.total),
+            backgroundColor: '#ff9800',
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'top' } },
+          scales: {
+            y: {
+              ticks: {
+                callback: (v: any) => 'R$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 0 })
+              }
+            }
+          }
+        }
+      });
+      this.charts.push(chart3);
     }
   }
 }

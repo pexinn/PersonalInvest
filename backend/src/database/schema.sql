@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS proventos (
   data_pagamento DATE NOT NULL,
   ticker TEXT NOT NULL,
   corretora TEXT,
+  moeda TEXT NOT NULL DEFAULT 'BRL' CHECK(moeda IN ('BRL','USD')),
   valor REAL NOT NULL,
   tipo TEXT NOT NULL CHECK(tipo IN ('Dividendo','JCP','Rendimento','Aluguel','Outros')),
   observacao TEXT,

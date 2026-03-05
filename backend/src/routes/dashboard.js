@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
       LEFT JOIN aportes ap ON a.ticker = ap.ticker
       WHERE a.ativo = 1
       GROUP BY a.categoria, a.moeda
+      HAVING quantidade > 1e-8
     `).all();
 
     // 2. Todos os tickers com posição (para buscar cotação)
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
       LEFT JOIN aportes ap ON a.ticker = ap.ticker
       WHERE a.ativo = 1
       GROUP BY a.ticker
-      HAVING qtde > 0
+      HAVING qtde > 1e-8
     `).all();
 
     const tickers = tickersComPosicao.filter(t => !t.atualizacao_manual).map(t => t.ticker);

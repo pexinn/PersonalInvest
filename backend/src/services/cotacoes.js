@@ -33,6 +33,17 @@ async function getCotacao(ticker) {
   try {
     // Ativos BR: adiciona sufixo .SA se não terminar em .SA ou não for FII (contém número+letras)
     let symbol = ticker.toUpperCase();
+
+    // Map specific tickers to Yahoo Finance formats
+    const aliases = {
+      'USDC': 'USDCBRL=X', // ou USDC-BRL (cripto)
+      'BTC': 'BTC-BRL',
+      'ETH': 'ETH-BRL'
+    };
+    if (aliases[symbol]) {
+      symbol = aliases[symbol];
+    }
+
     const isBR = /^[A-Z]{4}\d{1,2}$/.test(symbol) || /^[A-Z]{4}3$|[A-Z]{4}11$/.test(symbol);
     if (isBR && !symbol.endsWith('.SA')) {
       symbol = symbol + '.SA';

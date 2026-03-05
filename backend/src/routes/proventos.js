@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
   if (tipo) { query += ' AND p.tipo = ?'; params.push(tipo); }
   if (inicio) { query += ' AND p.data_pagamento >= ?'; params.push(inicio); }
   if (fim) { query += ' AND p.data_pagamento <= ?'; params.push(fim); }
+  if (req.query.mes) { query += " AND strftime('%Y-%m', p.data_pagamento) = ?"; params.push(req.query.mes); }
 
   query += ' ORDER BY p.data_pagamento DESC, p.id DESC';
 
