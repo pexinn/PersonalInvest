@@ -105,7 +105,12 @@ router.get('/', async (req, res) => {
     `).all();
 
     // 7. Totais gerais
-    const totalInvestido = porCategoria.reduce((s, c) => s + c.valor_investido, 0);
+    const totalInvestido = porCategoria.reduce((s, c) => {
+      let inv = c.valor_investido;
+      if (c.moeda === 'USD') inv = inv * usdToBrl;
+      return s + inv;
+    }, 0);
+
     const totalAtual = Object.values(valorAtualPorCategoria).reduce((s, v) => s + v, 0);
     const retornoTotal = totalAtual - totalInvestido;
     const retornoPct = totalInvestido > 0 ? (retornoTotal / totalInvestido) * 100 : 0;
@@ -119,13 +124,18 @@ router.get('/', async (req, res) => {
         proventos_mes: proventosMes,
         proventos_ano: proventosAno,
       },
-      por_categoria: porCategoria.map(c => ({
-        ...c,
-        valor_atual: valorAtualPorCategoria[c.categoria] || 0,
-        retorno_pct: c.valor_investido > 0
-          ? (((valorAtualPorCategoria[c.categoria] || 0) - c.valor_investido) / c.valor_investido) * 100
-          : 0,
-      })),
+      por_categoria: porCategoria.map(c => {
+        let inv = c.valor_investido;
+        if (c.moeda === 'USD') inv = inv * usdToBrl;
+
+        const atual = valorAtualPorCategoria[c.categoria] || 0;
+        return {
+          ...c,
+          valor_investido: inv, // convertido para enviar em BRL
+          valor_atual: atual,
+          retorno_pct: inv > 0 ? ((atual - inv) / inv) * 100 : 0,
+        };
+      }),
       evolucao_aportes: evolucaoAportes.reverse(),
       proventos_mensais: proventosMensais.reverse(),
     });

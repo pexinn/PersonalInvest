@@ -13,13 +13,15 @@
   <div class="kpi-card">
     <mat-icon class="kpi-icon">account_balance</mat-icon>
     <span class="kpi-label">Total Investido</span>
-    <span class="kpi-value">{{ totalInvestido | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+    <span class="kpi-value">{{ totalInvestido | currency:(categoria === 'eua' ? 'USD' : 'BRL'):'symbol':'1.2-2':'pt-BR' }}</span>
   </div>
+  
   <div class="kpi-card">
     <mat-icon class="kpi-icon" style="color:#4caf50">show_chart</mat-icon>
-    <span class="kpi-label">Valor Atual</span>
-    <span class="kpi-value">{{ totalAtual | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+    <span class="kpi-label">Total Atual</span>
+    <span class="kpi-value">{{ totalAtual | currency:(categoria === 'eua' ? 'USD' : 'BRL'):'symbol':'1.2-2':'pt-BR' }}</span>
   </div>
+  
   <div class="kpi-card">
     <mat-icon class="kpi-icon" [style.color]="totalRetorno >= 0 ? '#4caf50' : '#f44336'">
       {{ totalRetorno >= 0 ? 'arrow_upward' : 'arrow_downward' }}
@@ -30,7 +32,7 @@
       [class.currency-negative]="totalRetornoPct < 0">
       {{ totalRetornoPct | number:'1.2-2':'pt-BR' }}%
     </span>
-    <span class="kpi-sub">{{ totalRetorno | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+    <span class="kpi-sub">{{ totalRetorno | currency:(categoria === 'eua' ? 'USD' : 'BRL'):'symbol':'1.2-2':'pt-BR' }}</span>
   </div>
   <div class="kpi-card">
     <mat-icon class="kpi-icon">list</mat-icon>
@@ -81,7 +83,7 @@
     </ng-container>
     <ng-container matColumnDef="valor_investido">
       <th mat-header-cell *matHeaderCellDef>Investido</th>
-      <td mat-cell *matCellDef="let a">{{ a.valor_investido_total | currency:'BRL':'symbol':'1.0-0':'pt-BR' }}</td>
+      <td mat-cell *matCellDef="let a">{{ a.valor_investido_total | currency:a.moeda:'symbol':'1.0-0':'pt-BR' }}</td>
     </ng-container>
     <ng-container matColumnDef="valor_atual">
       <th mat-header-cell *matHeaderCellDef>Atual</th>

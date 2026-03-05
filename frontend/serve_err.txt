@@ -59,3 +59,25 @@ chunk-GAPM5GO3.js   | aportes-component | 34.78 kB |
 Application bundle generation complete. [0.254 seconds]
 
 Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.37 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-ABZ6FGNW.js   | carteira-component | 23.16 kB | 
+
+Application bundle generation complete. [1.697 seconds]
+
+Page reload sent to client(s).
+- Changes detected. Rebuilding...
+
+Initial chunk files | Names              | Raw size
+main.js             | main               | 15.37 kB | 
+
+Lazy chunk files    | Names              | Raw size
+chunk-AP3F7VR6.js   | carteira-component | 23.25 kB | 
+
+Application bundle generation complete. [0.271 seconds]
+
+Page reload sent to client(s).
